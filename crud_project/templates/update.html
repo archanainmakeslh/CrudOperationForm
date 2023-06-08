@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post">
+                {% csrf_token %}
+                <label for="sl_no">Sl No:</label>
+                <input type="text" name="sl_no" id="sl_no" value="{{ contact.sl_no }}" required><br><br>
+                        
+                <label for="item_name">Item Name:</label>
+                <input type="text" name="item_name" id="item_name" value="{{ contact.item_name }}" required><br><br>
+                        
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" rows="4" required>{{ contact.description }}</textarea><br><br>
+                        
+                <input type="submit" value="Update">
+            </form>
+         
+        </div>
+    </div>
+</div>
+<div class="box">
+    {% if messages %}
+         {% for msgs in messages %}
+             {{msgs}}
+         {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

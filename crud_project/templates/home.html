@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" class="p-3 shadow">
+            {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="sl_no" placeholder="SL No:"><br>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="item_name" placeholder="Item name"><br>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="description" placeholder="Description"><br>
+                </div>
+                    <input type="submit" class="btn btn-success">
+
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="box">
+        {% if messages %}
+             {% for msgs in messages %}
+                 {{msgs}}
+             {% endfor %}
+        {% endif %}
+    </div>
+    <br><br>
+
+    <div class="container-fluid" style="margin-top: 15px; text-align:center;">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">SL No</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col;colspan='2';">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in item1 %}
+                        <tr>
+                        
+                            <td>{{i.sl_no}}</td>
+                            <td>{{i.item_name}}</td>
+                            <td>{{i.description}}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <a href="{% url 'update' i.id %}" class="btn btn-warning">Update</a>
+                                        
+                                    </div>
+                                </div>    
+                            </td>
+                            <td>        
+                                <div>
+                                    <div class="col-3">
+                                        <a href="{% url 'delete' i.id %}" class="btn btn-danger">Delete</a>
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>            
+{% endblock %}
